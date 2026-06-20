@@ -82,7 +82,7 @@
         <!--    整合引用所有Starter模块    -->
         <module>guardian-starter-all</module>
         <!--    示例模块    -->
-        <module>guardian-example</module>
+<!--        <module>guardian-example</module>-->
         <module>guardian-dependencies</module>
     </modules>
 
