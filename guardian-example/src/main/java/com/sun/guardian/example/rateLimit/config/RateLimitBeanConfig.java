@@ -6,7 +6,7 @@ import com.sun.guardian.rate.limit.core.service.response.RateLimitResponseHandle
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 限流模块自定义 Bean 配置

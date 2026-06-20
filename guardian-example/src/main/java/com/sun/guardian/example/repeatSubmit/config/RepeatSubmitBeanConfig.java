@@ -7,7 +7,7 @@ import com.sun.guardian.repeat.submit.core.service.response.RepeatSubmitResponse
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 防重提交模块自定义 Bean 配置

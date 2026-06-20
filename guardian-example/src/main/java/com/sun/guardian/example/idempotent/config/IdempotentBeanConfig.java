@@ -6,7 +6,7 @@ import com.sun.guardian.idempotent.core.service.response.IdempotentResponseHandl
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * 接口幂等模块自定义 Bean 配置
