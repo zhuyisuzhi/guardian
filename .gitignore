@@ -39,3 +39,7 @@ build/
 
 ### Docs（内部文档，不提交） ###
 docs/
+
+AGENTS.md
+opencode.jsonc
+.codegraph
