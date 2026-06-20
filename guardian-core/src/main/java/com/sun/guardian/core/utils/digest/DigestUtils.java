@@ -10,7 +10,6 @@ import org.bouncycastle.crypto.paddings.PKCS7Padding;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.crypto.params.*;
 import org.bouncycastle.math.ec.ECPoint;
-import org.springframework.util.Base64Utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
@@ -109,14 +108,16 @@ public class DigestUtils {
 
         byte[] result = new byte[digest.getDigestSize()];
         digest.doFinal(result, 0);
-        return Base64Utils.encodeToString(result);
+        return Base64.getEncoder().encodeToString(result);
+//        return Base64Utils.encodeToString(result);
     }
 
     /**
      * RSA解密
      */
     public static String rsaDecrypt(String encryptedData, String privateKey) throws Exception {
-        byte[] privateKeyBytes = Base64Utils.decodeFromString(privateKey);
+//        byte[] privateKeyBytes = Base64Utils.decodeFromString(privateKey);
+        byte[] privateKeyBytes = Base64.getDecoder().decode(privateKey);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PrivateKey privateKeyObj = keyFactory.generatePrivate(keySpec);
@@ -124,7 +125,8 @@ public class DigestUtils {
 
         cipher.init(Cipher.DECRYPT_MODE, privateKeyObj);
 
-        byte[] data = Base64Utils.decodeFromString(encryptedData);
+//        byte[] data = Base64Utils.decodeFromString(encryptedData);
+        byte[] data = Base64.getDecoder().decode(encryptedData);
 
         return new String(cipher.doFinal(data), StandardCharsets.UTF_8);
     }
@@ -133,7 +135,8 @@ public class DigestUtils {
      * RSA加密
      */
     public static String rsaEncrypt(String data, String publicKey) throws Exception {
-        byte[] publicKeyBytes = Base64Utils.decodeFromString(publicKey);
+//        byte[] publicKeyBytes = Base64Utils.decodeFromString(publicKey);
+        byte[] publicKeyBytes = Base64.getDecoder().decode(publicKey);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PublicKey publicKeyObj = keyFactory.generatePublic(keySpec);
@@ -143,16 +146,19 @@ public class DigestUtils {
 
         byte[] resultBytes = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
 
-        return Base64Utils.encodeToString(resultBytes);
+//        return Base64Utils.encodeToString(resultBytes);
+        return Base64.getEncoder().encodeToString(resultBytes);
     }
 
     /**
      * AES解密
      */
     public static String aesDecrypt(String encryptedData, String key) throws Exception {
-        byte[] keyBytes = Base64Utils.decodeFromString(key);
+//        byte[] keyBytes = Base64Utils.decodeFromString(key);
+        byte[] keyBytes = Base64.getDecoder().decode(key);
         SecretKey keyObj = new SecretKeySpec(keyBytes, "AES");
-        byte[] combined = Base64Utils.decodeFromString(encryptedData);
+//        byte[] combined = Base64Utils.decodeFromString(encryptedData);
+        byte[] combined = Base64.getDecoder().decode(encryptedData);
 
         byte[] iv = new byte[12];
         byte[] encrypted = new byte[combined.length - 12];
@@ -170,7 +176,8 @@ public class DigestUtils {
      * AES加密
      */
     public static String aesEncrypt(String data, String key) throws Exception {
-        byte[] keyBytes = Base64Utils.decodeFromString(key);
+//        byte[] keyBytes = Base64Utils.decodeFromString(key);
+        byte[] keyBytes = Base64.getDecoder().decode(key);
         SecretKey keyObj = new SecretKeySpec(keyBytes, "AES");
         byte[] iv = new byte[12];
         new SecureRandom().nextBytes(iv);
@@ -183,7 +190,8 @@ public class DigestUtils {
         byte[] combined = new byte[iv.length + encrypted.length];
         System.arraycopy(iv, 0, combined, 0, iv.length);
         System.arraycopy(encrypted, 0, combined, iv.length, encrypted.length);
-        return Base64Utils.encodeToString(combined);
+//        return Base64Utils.encodeToString(combined);
+        return Base64.getEncoder().encodeToString(combined);
     }
 
     /**
@@ -193,8 +201,10 @@ public class DigestUtils {
      * @param key           密钥（Base64 格式，16字节）
      */
     public static String sm4Decrypt(String encryptedData, String key) throws Exception {
-        byte[] keyBytes = Base64Utils.decodeFromString(key);
-        byte[] combined = Base64Utils.decodeFromString(encryptedData);
+//        byte[] keyBytes = Base64Utils.decodeFromString(key);
+        byte[] keyBytes = Base64.getDecoder().decode(key);
+//        byte[] combined = Base64Utils.decodeFromString(encryptedData);
+        byte[] combined = Base64.getDecoder().decode(encryptedData);
 
         byte[] iv = new byte[16];
         byte[] encrypted = new byte[combined.length - 16];
@@ -223,7 +233,8 @@ public class DigestUtils {
      * @return 密文（Base64 格式，IV + 密文）
      */
     public static String sm4Encrypt(String data, String key) throws Exception {
-        byte[] keyBytes = Base64Utils.decodeFromString(key);
+//        byte[] keyBytes = Base64Utils.decodeFromString(key);
+        byte[] keyBytes = Base64.getDecoder().decode(key);
         byte[] iv = new byte[16];
         new SecureRandom().nextBytes(iv);
 
@@ -240,7 +251,8 @@ public class DigestUtils {
         byte[] combined = new byte[iv.length + encrypted.length];
         System.arraycopy(iv, 0, combined, 0, iv.length);
         System.arraycopy(encrypted, 0, combined, iv.length, encrypted.length);
-        return Base64Utils.encodeToString(combined);
+//        return Base64Utils.encodeToString(combined);
+        return Base64.getEncoder().encodeToString(combined);
     }
 
 
@@ -255,13 +267,16 @@ public class DigestUtils {
         ECDomainParameters domainParameters = new ECDomainParameters(
                 sm2Params.getCurve(), sm2Params.getG(), sm2Params.getN());
 
-        BigInteger privateKeyValue = new BigInteger(1, Base64Utils.decodeFromString(privateKey));
+//        BigInteger privateKeyValue = new BigInteger(1, Base64Utils.decodeFromString(privateKey));
+        BigInteger privateKeyValue = new BigInteger(1, Base64.getDecoder().decode(privateKey));
+
         ECPrivateKeyParameters privateKeyParameters = new ECPrivateKeyParameters(privateKeyValue, domainParameters);
 
         SM2Engine engine = new SM2Engine(SM2Engine.Mode.C1C3C2);
         engine.init(false, privateKeyParameters);
 
-        byte[] data = Base64Utils.decodeFromString(encryptedData);
+//        byte[] data = Base64Utils.decodeFromString(encryptedData);
+        byte[] data = Base64.getDecoder().decode(encryptedData);
         byte[] result = engine.processBlock(data, 0, data.length);
         return hexToString(new String(result, StandardCharsets.UTF_8));
     }
@@ -277,7 +292,8 @@ public class DigestUtils {
         ECDomainParameters domainParameters = new ECDomainParameters(
                 sm2Params.getCurve(), sm2Params.getG(), sm2Params.getN());
 
-        ECPoint publicKeyPoint = sm2Params.getCurve().decodePoint(Base64Utils.decodeFromString(publicKey));
+//        ECPoint publicKeyPoint = sm2Params.getCurve().decodePoint(Base64Utils.decodeFromString(publicKey));
+        ECPoint publicKeyPoint = sm2Params.getCurve().decodePoint(Base64.getDecoder().decode(publicKey));
         ECPublicKeyParameters publicKeyParameters = new ECPublicKeyParameters(publicKeyPoint, domainParameters);
 
         SM2Engine engine = new SM2Engine(SM2Engine.Mode.C1C3C2);
@@ -286,7 +302,8 @@ public class DigestUtils {
         String hexData = stringToHex(data);
         byte[] dataBytes = hexData.getBytes(StandardCharsets.UTF_8);
         byte[] result = engine.processBlock(dataBytes, 0, dataBytes.length);
-        return Base64Utils.encodeToString(result);
+//        return Base64Utils.encodeToString(result);
+        return Base64.getEncoder().encodeToString(result);
     }
 
     /**

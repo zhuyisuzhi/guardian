@@ -3,8 +3,8 @@ package com.sun.guardian.core.service.response;
 import com.sun.guardian.core.domain.BaseResult;
 import com.sun.guardian.core.utils.json.GuardianJsonUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**

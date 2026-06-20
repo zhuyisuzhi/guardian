@@ -4,8 +4,8 @@ import com.sun.guardian.core.context.UserContext;
 import com.sun.guardian.core.utils.ip.IpUtils;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * 用户上下文工具类

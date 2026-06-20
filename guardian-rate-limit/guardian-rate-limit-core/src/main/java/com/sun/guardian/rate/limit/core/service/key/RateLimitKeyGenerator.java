@@ -3,7 +3,7 @@ package com.sun.guardian.rate.limit.core.service.key;
 import com.sun.guardian.rate.limit.core.domain.rule.RateLimitRule;
 import com.sun.guardian.rate.limit.core.domain.token.RateLimitToken;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 接口限流键生成接口

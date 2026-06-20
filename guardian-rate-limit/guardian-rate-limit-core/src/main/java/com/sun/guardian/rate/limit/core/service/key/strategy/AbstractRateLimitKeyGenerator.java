@@ -12,7 +12,7 @@ import com.sun.guardian.rate.limit.core.enums.algorithm.RateLimitAlgorithm;
 import com.sun.guardian.rate.limit.core.service.key.RateLimitKeyGenerator;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static com.sun.guardian.rate.limit.core.constants.RateLimitKeyPrefixConstants.SW_KEY_PREFIX;
 import static com.sun.guardian.rate.limit.core.constants.RateLimitKeyPrefixConstants.TB_KEY_PREFIX;

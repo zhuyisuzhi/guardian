@@ -1,6 +1,6 @@
 package com.sun.guardian.core.utils.ip;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 客户端 IP 获取工具类

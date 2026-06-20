@@ -5,8 +5,8 @@ import com.sun.guardian.core.service.base.BaseConfig;
 import com.sun.guardian.core.enums.response.ResponseMode;
 import com.sun.guardian.core.service.response.GuardianResponseHandler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.function.Function;
 

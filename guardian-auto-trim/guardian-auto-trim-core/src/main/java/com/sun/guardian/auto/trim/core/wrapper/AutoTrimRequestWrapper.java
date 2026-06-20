@@ -5,7 +5,7 @@ import com.sun.guardian.core.utils.args.ArgsUtils;
 import com.sun.guardian.core.utils.string.CharacterSanitizer;
 import com.sun.guardian.core.wrapper.RepeatableRequestWrapper;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;

@@ -3,7 +3,7 @@ package com.sun.guardian.repeat.submit.core.service.key;
 import com.sun.guardian.repeat.submit.core.domain.rule.RepeatSubmitRule;
 import com.sun.guardian.repeat.submit.core.domain.token.RepeatSubmitToken;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 防重键生成器接口

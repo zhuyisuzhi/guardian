@@ -12,7 +12,7 @@ import com.sun.guardian.repeat.submit.core.service.encrypt.strategy.AbstractKeyE
 import com.sun.guardian.repeat.submit.core.service.key.KeyGenerator;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static com.sun.guardian.repeat.submit.core.constants.KeyPrefixConstants.DEFAULT_KEY_PREFIX;
 
