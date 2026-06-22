@@ -19,7 +19,7 @@
 
 ---
 
-> **说明**：本仓库 Fork 自 [BigGG-Guardian/guardian](https://github.com/BigGG-Guardian/guardian)，已适配 Spring Boot 3（Java 17+）。仅更新了 Maven 依赖版本，未对代码逻辑作任何改动。
+> **说明**：本仓库 Fork 自 [BigGG-Guardian/guardian](https://github.com/BigGG-Guardian/guardian)，已适配 Spring Boot 3（Java 17+）（boot3分支）。仅更新了 Maven 依赖版本，未对代码逻辑作任何改动。
 
 <p align="center">
   <img src="assets/guardian-mindmap.png" alt="Guardian 功能全景图" width="700">
