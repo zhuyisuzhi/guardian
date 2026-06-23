@@ -1,9 +1,11 @@
 package com.sun.guardian.idempotent.core.advice;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.guardian.core.utils.json.GuardianJsonUtils;
 import com.sun.guardian.idempotent.core.config.IdempotentConfig;
 import com.sun.guardian.idempotent.core.domain.result.IdempotentResult;
 import com.sun.guardian.idempotent.core.storage.IdempotentResultCache;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
@@ -28,6 +30,8 @@ import jakarta.servlet.http.HttpServletRequest;
 public class IdempotentResultCacheAdvice implements ResponseBodyAdvice<Object>, Ordered {
     private final IdempotentResultCache resultCache;
     private final int order;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public static final String ATTR_KEY = "guardian_idempotent_result";
 
@@ -65,7 +69,8 @@ public class IdempotentResultCacheAdvice implements ResponseBodyAdvice<Object>, 
 
         if (StringUtils.hasText(resultCacheStr)) {
             IdempotentResult result = GuardianJsonUtils.toBean(resultCacheStr, IdempotentResult.class);
-            result.setJsonResult(body == null ? "null" : GuardianJsonUtils.toJsonStr(body));
+            // 使用spring容器中的ObjectMapper
+            result.setJsonResult(body == null ? "null" : GuardianJsonUtils.toJsonStr(objectMapper, body));
             resultCache.cacheResult(result);
         }
 

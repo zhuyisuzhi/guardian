@@ -29,6 +29,14 @@ public class GuardianJsonUtils {
         }
     }
 
+    public static String toJsonStr(ObjectMapper objectMapper, Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException("JSON serialize failed", e);
+        }
+    }
+
     public static <T> T toBean(String json, Class<T> clazz) {
         try {
             return MAPPER.readValue(json, clazz);
