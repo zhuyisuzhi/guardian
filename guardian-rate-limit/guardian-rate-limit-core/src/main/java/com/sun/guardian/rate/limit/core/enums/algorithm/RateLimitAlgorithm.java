@@ -15,5 +15,9 @@ public enum RateLimitAlgorithm {
     /**
      * 令牌桶（惰性补充，请求到来时按时间差补令牌）
      */
-    TOKEN_BUCKET;
+    TOKEN_BUCKET,
+    /**
+     * Redisson的RateLimiter算法
+     */
+    REDISSON
 }

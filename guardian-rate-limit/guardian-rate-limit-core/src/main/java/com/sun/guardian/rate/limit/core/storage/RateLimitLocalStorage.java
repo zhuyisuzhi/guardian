@@ -1,5 +1,6 @@
 package com.sun.guardian.rate.limit.core.storage;
 
+import com.sun.guardian.core.exception.RateLimitException;
 import com.sun.guardian.rate.limit.core.domain.token.RateLimitToken;
 import com.sun.guardian.rate.limit.core.enums.algorithm.RateLimitAlgorithm;
 
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 限流存储 - 本地缓存（单机）
- *
+ * <p>
  * 滑动窗口：LinkedList + synchronized 记录时间戳，令牌桶：惰性补充，请求时按时间差计算令牌
  *
  * @author scj
@@ -25,7 +26,9 @@ public class RateLimitLocalStorage implements RateLimitStorage {
 
     private final ConcurrentHashMap<String, TokenBucket> buckets = new ConcurrentHashMap<>();
 
-    /** 空闲超过 10 分钟的 key 会被清理 */
+    /**
+     * 空闲超过 10 分钟的 key 会被清理
+     */
     private static final long IDLE_THRESHOLD_MS = 10 * 60 * 1000L;
 
     {
@@ -42,6 +45,9 @@ public class RateLimitLocalStorage implements RateLimitStorage {
      */
     @Override
     public boolean tryAcquire(RateLimitToken token) {
+        if (token.getAlgorithm() == RateLimitAlgorithm.REDISSON) {
+            throw new RateLimitException("Redisson rate limit algorithm is not supported in local storage");
+        }
         if (token.getAlgorithm() == RateLimitAlgorithm.TOKEN_BUCKET) {
             return tryAcquireTokenBucket(token);
         }

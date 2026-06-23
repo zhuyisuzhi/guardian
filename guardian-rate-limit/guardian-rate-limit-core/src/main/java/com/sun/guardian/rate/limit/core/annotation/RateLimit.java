@@ -21,19 +21,19 @@ public @interface RateLimit {
     /**
      * 限流数量
      * <p>
-     * 滑动窗口：QPS，窗口内最大请求数 = qps × window(秒)，令牌桶：每 window 补充的令牌数，补充速率 = qps / window(秒)
+     * 滑动窗口：QPS，窗口内最大请求数 = qps × window(秒)，令牌桶：每 window 补充的令牌数，补充速率 = qps / window(秒)，Redisson的RateLimiter算法：窗口内最大请求数 = qps
      */
     int qps() default 10;
 
     /**
      * 时间窗口
      * <p>
-     * 滑动窗口：窗口跨度，令牌桶：补充周期
+     * 滑动窗口：窗口跨度，令牌桶：补充周期，Redisson的RateLimiter算法：窗口跨度
      */
     int window() default 1;
 
     /**
-     * 时间窗口单位（两种算法均使用）
+     * 时间窗口单位（三种算法均使用）
      */
     TimeUnit windowUnit() default TimeUnit.SECONDS;
 

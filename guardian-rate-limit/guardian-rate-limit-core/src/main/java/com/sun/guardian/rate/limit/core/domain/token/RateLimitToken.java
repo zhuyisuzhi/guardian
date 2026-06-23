@@ -25,7 +25,7 @@ public class RateLimitToken {
     private String key;
 
     /**
-     * 限流数量，滑动窗口 = QPS，令牌桶 = 每 window 补充的令牌数
+     * 限流数量，滑动窗口 = QPS，令牌桶 = 每 window 补充的令牌数，Redisson的RateLimiter算法：窗口内最大请求数 = qps
      */
     private int qps;
 
